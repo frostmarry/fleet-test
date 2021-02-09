@@ -36,8 +36,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 5000
-    nodePort: 30163
+  - port: 5000    
   selector:
     app: dumb
     tier: dumbflix
