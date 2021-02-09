@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dumb-v1
+  labels:
+    app: dumb
+    version: v1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dumb
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: dumb
+        version: v2
+    spec:
+      containers:
+      - image: frostmarry/dumbplay-be
+        name: dumbflix
+        ports:
+        - containerPort: 5000
