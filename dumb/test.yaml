@@ -21,7 +21,7 @@ spec:
           requests:
             cpu: 100m
             memory: 100Mi
-        ports:
+        #ports:
         #- containerPort: 5000
 
 ---
@@ -35,7 +35,7 @@ metadata:
     tier: dumbflix
 spec:
   type: NodePort
-  ports:
+  #ports:
   #- port: 5000    
   selector:
     app: dumb
