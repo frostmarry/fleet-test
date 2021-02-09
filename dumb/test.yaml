@@ -3,13 +3,17 @@ kind: Service
 metadata:
   name: dumb
   labels:
-    app: dumb
+    workload.user.cattle.io/workloadselector: dumbflix
 spec:
   ports:
-  - name: http
-    port: 80
+  - name: dumbflix-port
+    nodePort: 30163
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
   selector:
-    app: dumb
+    workload.user.cattle.io/workloadselector: dumbflix
+  type: NodePort
 ---
 
 apiVersion: apps/v1
@@ -17,50 +21,42 @@ kind: Deployment
 metadata:
   name: dumb-v1
   labels:
-    app: dumb
-    version: v1
+    cattle.io/creator: norman
+    workload.user.cattle.io/workloadselector: dumbflix
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dumb
-      version: v1
+      workload.user.cattle.io/workloadselector: dumbflix
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
-        app: dumb
-        version: v1
+        workload.user.cattle.io/workloadselector: dumbflix
     spec:
       containers:
+      - env:
+        - name: COTE_LOG
+          value: "false"
+        - name: COTE_LOG_UNKNOWN_EVENTS
+          value: "false"
+        - name: COTE_REQUEST_TIMEOUT
+          value: "300000"
+        - name: MICROGEN_SERVICES
+          value: main,user
+        - name: DISCOVERY_HOSTNAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.podIP
       - image: frostmarry/dumbflix-be
         name: dumbflix
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
-
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: dumb-v2
-  labels:
-    app: dumb
-    version: v2
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: dumb
-      version: v2
-  template:
-    metadata:
-      labels:
-        app: dumb
-        version: v2
-    spec:
-      containers:
-      - image: frostmarry/dumbplay-be
-        name: dumbplay
-        ports:
-        - containerPort: 5000
-
+          name: 5000tcp01
+          protocol: TCP
