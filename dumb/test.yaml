@@ -1,11 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
+metadata:
+  name: dumbflix
+spec:
   replicas: 1
   template:
     metadata:
       labels:
         app: dumb
-        tier: dumbflix
     spec:
       containers:
       - name: dumb
@@ -25,7 +27,6 @@ metadata:
   name: dumb
   labels:
     app: dumb
-    tier: dumbflix
 spec:
   type: NodePort
   ports:
