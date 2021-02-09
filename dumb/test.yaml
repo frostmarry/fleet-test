@@ -1,49 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dumbflix
+spec:
+  selector:
+    matchLabels:
+      app: dumb
+      tier: dumbflix
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dumb
+        tier: dumbflix
+    spec:
+      containers:
+      - name: dumb
+        image: frostmarry/dumbflix-be
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 5000
+
+---
+
 apiVersion: v1
 kind: Service
 metadata:
   name: dumb
   labels:
-    workload.user.cattle.io/workloadselector: dumbflix
-  namespace: default
+    app: dumb
+    tier: dumbflix
 spec:
-  ports:
-  - name: dumbflix-port
-    nodePort: 30163
-    port: 5000
-    protocol: TCP
-    targetPort: 5000
-  selector:
-    workload.user.cattle.io/workloadselector: dumbflix
   type: NodePort
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: dumb-v1
-  labels:
-    cattle.io/creator: norman
-    workload.user.cattle.io/workloadselector: dumbflix
-spec:
-  replicas: 1
+  ports:
+  - port: 5000
+    nodePort: 30163
   selector:
-    matchLabels:
-      workload.user.cattle.io/workloadselector: dumbflix
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        workload.user.cattle.io/workloadselector: dumbflix
-    spec:
-      containers:
-      - image: frostmarry/dumbflix-be
-        name: dumbflix
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 5000
-          name: 5000tcp01
-          protocol: TCP
+    app: dumb
+    tier: dumbflix
