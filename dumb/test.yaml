@@ -4,6 +4,7 @@ metadata:
   name: dumb
   labels:
     workload.user.cattle.io/workloadselector: dumbflix
+  namespace: default
 spec:
   ports:
   - name: dumbflix-port
@@ -39,20 +40,6 @@ spec:
         workload.user.cattle.io/workloadselector: dumbflix
     spec:
       containers:
-      - env:
-        - name: COTE_LOG
-          value: "false"
-        - name: COTE_LOG_UNKNOWN_EVENTS
-          value: "false"
-        - name: COTE_REQUEST_TIMEOUT
-          value: "300000"
-        - name: MICROGEN_SERVICES
-          value: main,user
-        - name: DISCOVERY_HOSTNAME
-          valueFrom:
-            fieldRef:
-              apiVersion: v1
-              fieldPath: status.podIP
       - image: frostmarry/dumbflix-be
         name: dumbflix
         imagePullPolicy: Always
