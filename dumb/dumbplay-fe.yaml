@@ -18,7 +18,7 @@ spec:
         version: v2
     spec:
       containers:
-      - image: frostmarry/dumbplay-be
+      - image: frostmarry/dumbflix-be
         name: dumbplay
         ports:
         - containerPort: 5000
