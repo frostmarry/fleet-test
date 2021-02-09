@@ -1,1 +1,66 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dumb
+  labels:
+    app: dumb
+spec:
+  ports:
+  - name: http
+    port: 80
+  selector:
+    app: dumb
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dumb-v1
+  labels:
+    app: dumb
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dumb
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: dumb
+        version: v1
+    spec:
+      containers:
+      - image: frostmarry/dumbflix-be
+        name: dumbflix
+        ports:
+        - containerPort: 5000
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dumb-v2
+  labels:
+    app: dumb
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dumb
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: dumb
+        version: v2
+    spec:
+      containers:
+      - image: frostmarry/dumbplay-be
+        name: dumbplay
+        ports:
+        - containerPort: 5000
 
