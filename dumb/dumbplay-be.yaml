@@ -6,7 +6,7 @@ metadata:
     app: dumb
     version: v1
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: dumb
@@ -15,7 +15,7 @@ spec:
     metadata:
       labels:
         app: dumb
-        version: v2
+        version: v1
     spec:
       containers:
       - image: frostmarry/dumbplay-be
