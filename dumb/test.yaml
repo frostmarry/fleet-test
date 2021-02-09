@@ -1,12 +1,5 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  name: dumbflix
-spec:
-  selector:
-    matchLabels:
-      app: dumb
-      tier: dumbflix
   replicas: 1
   template:
     metadata:
@@ -21,8 +14,8 @@ spec:
           requests:
             cpu: 100m
             memory: 100Mi
-        #ports:
-        #- containerPort: 5000
+        ports:
+        - containerPort: 5000
 
 ---
 
@@ -35,8 +28,8 @@ metadata:
     tier: dumbflix
 spec:
   type: NodePort
-  #ports:
-  #- port: 5000    
+  ports:
+  - port: 5000    
   selector:
     app: dumb
     tier: dumbflix
