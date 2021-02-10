@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: ajgajg-development
   annotations:
     cattle.io/timestamp: 2021-02-10T04:15:38.641Z
   labels:
