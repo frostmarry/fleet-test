@@ -60,3 +60,26 @@ spec:
     - port: 4000
   selector:
     app: ajgajg-development
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  creationTimestamp: "2021-02-10T13:34:13Z"
+  generation: 1
+  labels:
+    app: ajgajg-development
+  name: ajgajg-development
+  namespace: default  
+spec:
+  rules:
+  - host: xip.io
+    http:
+      paths:
+      - backend:
+          serviceName: ajgajg-development
+          servicePort: 4000
+        pathType: ImplementationSpecific
+status:
+  loadBalancer: {}
