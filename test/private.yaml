@@ -16,8 +16,6 @@ spec:
       labels:
         app: ajgajg-development
     spec:
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
       containers:
         - name: ajgajg-development
           image: privateregistry.sigmatech.microgen.id/ajgajg-development
@@ -30,9 +28,9 @@ spec:
             - name: COTE_LOG_UNKNOWN_EVENTS
               value: "false"
             - name: COTE_REQUEST_TIMEOUT
-              value: 300000
+              value: "300000"
             - name: COTE_MULTICAST_ADDRESS
-              value: 239.1.11.131
+              value: "239.1.11.131"
             - name: DISCOVERY_HOSTNAME
               valueFrom:
                 fieldRef:
