@@ -1,26 +1,63 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dumb-v2
+  annotations:
+    cattle.io/timestamp: 2021-02-10T04:15:38.641Z
   labels:
-    app: dumb
-    version: v2
+    app: ajgajg-development
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dumb
-      version: v2
+      app: ajgajg-development
   template:
     metadata:
       labels:
-        app: dumb
-        version: v2
+        app: ajgajg-development
     spec:
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
       containers:
-      - image: registry.mejik.xyz/guruintijpsje
-        name: dumbplay
-        ports:
-        - containerPort: 3000
+        - name: ajgajg-development
+          image: privateregistry.sigmatech.microgen.id/ajgajg-development
+          imagePullPolicy: Always
+          env:
+            - name: MICROGEN_SERVICES
+              value: main,user
+            - name: COTE_LOG
+              value: "false"
+            - name: COTE_LOG_UNKNOWN_EVENTS
+              value: "false"
+            - name: COTE_REQUEST_TIMEOUT
+              value: 300000
+            - name: COTE_MULTICAST_ADDRESS
+              value: 239.1.11.131
+            - name: DISCOVERY_HOSTNAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
+          ports:
+            - name: 4000tcp1
+              containerPort: 4000
+              protocol: TCP
+      dnsPolicy: ClusterFirst
       imagePullSecrets:
-      - name: mejik
+      - name: sigmatech-microgen
+      restartPolicy: Always
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ajgajg-development
+  labels:
+    app: ajgajg-development
+spec:
+  type: NodePort
+  ports:
+    - port: 4000
+  selector:
+    app: ajgajg-development
