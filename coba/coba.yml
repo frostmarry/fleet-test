@@ -17,14 +17,10 @@ spec:
         app: "cobaingress-development"
     spec:
       dnsPolicy: "ClusterFirst"
-      restartPolicy: "Always"
-      imagePullSecrets:
-        - name: "sigmatech-microgen"
-        - name: "mejik"
-        - name: "mejikhub"
+      restartPolicy: "Always"      
       containers:
         - name: "cobaingress-development"
-          image: "mejik/cobaingress-development"
+          image: "frostmarry/dumbplay-be"
           env:
             - name: "MICROGEN_SERVICES"
               value: "main,user"
