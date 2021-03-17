@@ -6,15 +6,18 @@ metadata:
     cattle.io/timestamp: "2021-02-15T10:15:27.619Z"
   labels:
     app: "cobaingress-development"
+    name: "dumb"
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: "cobaingress-development"
+      name: "dumb"
   template:
     metadata:
       labels:
         app: "cobaingress-development"
+        name: "dumb"
     spec:
       dnsPolicy: "ClusterFirst"
       restartPolicy: "Always"      
