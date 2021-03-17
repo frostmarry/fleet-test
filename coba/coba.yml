@@ -20,7 +20,7 @@ spec:
       restartPolicy: "Always"      
       containers:
         - name: "cobaingress-development"
-          image: "frostmarry/dumbflix-be:v1"
+          image: "frostmarry/dumbflix-be:v2"
           env:
             - name: "MICROGEN_SERVICES"
               value: "main,user"
