@@ -57,17 +57,17 @@ spec:
   selector:
     app: "cobaingress-development"
 
-# ---
+---
 
-# apiVersion: extensions/v1beta1
-# kind: Ingress
-# metadata:
-#   creationTimestamp: 2021-02-15T10:15:27.623Z
-#   generation: 1
-#   labels:
-#     app: cobaingress-development
-#   name: cobaingress-development
-#   namespace: default
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  creationTimestamp: 2021-02-15T10:15:27.623Z
+  generation: 1
+  labels:
+    app: cobaingress-development
+  name: cobaingress-development
+  namespace: default
 # perClusterState:
 #     - clusterId: fleet-default/c-kdkrk
 #       patch:
@@ -100,14 +100,15 @@ spec:
 #                 pathType: ImplementationSpecific
 #           tls:
 #           - secretName: aws
-#  spec:
-#    rules:
-#      - host: xip.io
-#        http:
-#          paths:
-#            - backend:
-#                serviceName: cobaingress-development
-#                servicePort: 5000
-#              pathType: ImplementationSpecific
-# status:
-#   loadBalancer: {}
+ spec:
+   rules:
+     - host: dumb.{clusterName}.microgen.id
+       http:
+         paths:
+           - backend:
+               serviceName: cobaingress-development
+               servicePort: 5000
+             pathType: ImplementationSpecific
+   
+status:
+  loadBalancer: {}
