@@ -70,7 +70,7 @@ metadata:
   namespace: default
 spec:
   rules:
-    - host: xip.io
+    - host: coba.aws.sigmatech.microgen.id
       http:
         paths:
           - backend:
