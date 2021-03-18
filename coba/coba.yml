@@ -1,82 +1,113 @@
-apiVersion: "apps/v1"
-kind: "Deployment"
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: "cobaingress-development"
+  name: coba-clogin
   annotations:
-    cattle.io/timestamp: "2021-02-15T10:15:27.619Z"
+    cattle.io/timestamp: 2021-02-10T04:15:38.641Z
   labels:
-    app: "cobaingress-development"
+    appId: clogin
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "cobaingress-development"
+      appId: clogin
   template:
     metadata:
       labels:
-        app: "cobaingress-development"
+        appId: clogin
+        environment: development
+        event: post
+        trigger: http
     spec:
-      dnsPolicy: "ClusterFirst"
-      restartPolicy: "Always"      
       containers:
-        - name: "cobaingress-development"
-          image: "frostmarry/dumbflix-be:v2"
+        - name: coba-clogin
+          resources:
+            limits:
+              memory: 2Gi
+          image: registry.mejik.xyz/emeteraidevf8wbd-clogin
+          imagePullPolicy: Always
           env:
-            - name: "MICROGEN_SERVICES"
-              value: "main,user"
-            - name: "COTE_LOG"
-              value: "false"
-            - name: "COTE_LOG_UNKNOWN_EVENTS"
-              value: "false"
-            - name: "COTE_REQUEST_TIMEOUT"
-              value: "300000"
-            - name: "COTE_MULTICAST_ADDRESS"
-              value: "239.1.11.131"
-            - name: "DISCOVERY_HOSTNAME"
-              valueFrom:
-                fieldRef:
-                  apiVersion: "v1"
-                  fieldPath: "status.podIP"
-          ports:
-            - containerPort: 5000
-              name: "5000tcp1"
-              protocol: "TCP"
+          - name: APP_ID
+            value: clogin
+          - name: AUTHENTICATION
+            value: public
+          - name: CONNECTION
+            value: public
+          - name: COTE_LOG
+            value: "false"
+          - name: COTE_MULTICAST_ADDRESS
+            value: 239.1.11.131
+          - name: COTE_REQUEST_TIMEOUT
+            value: "200000"
+          - name: ENVIRONMENT
+            value: DEVELOPMENT
+          - name: EVENT
+            value: post
+          - name: TRIGGER
+            value: http
+          - name: exec_timeout
+            value: 200s
+          - name: passredis
+            value: MPXnNDfU
+          - name: portredis
+            value: "6379"
+          - name: read_timeout
+            value: 200s
+          - name: urlapm
+            value: 103.147.4.230
+          - name: urlredis
+            value: 147.139.160.65
+          - name: write_timeout
+            value: 200s
+          - name: DISCOVERY_HOSTNAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.podIP
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: mejik
+      restartPolicy: Always
+
 
 ---
 
-apiVersion: "v1"
-kind: "Service"
+apiVersion: v1
+kind: Service
 metadata:
-  name: "cobaingress-development"
+  name: coba-clogin
   labels:
-    app: "cobaingress-development"
+    appId: clogin
 spec:
-  type: "NodePort"
+  type: ClusterIP
+  clusterIP: None
   ports:
-    - port: 5000
+  - name: default
+    port: 42
+    protocol: TCP
+    targetPort: 42
   selector:
-    app: "cobaingress-development"
+    appId: clogin
 
 ---
 
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  creationTimestamp: 2021-02-15T10:15:27.623Z
+  creationTimestamp: "2021-02-10T13:34:13Z"
   generation: 1
   labels:
-    app: cobaingress-development
-  name: cobaingress-development
-  namespace: default
- spec:
-   rules:
-     - host: xip.io
-       http:
-         paths:
-           - backend:
-               serviceName: cobaingress-development
-               servicePort: 5000
-             pathType: ImplementationSpecific
-   
+    app: ajgajg-development
+  name: ajgajg-development
+  namespace: default  
+spec:
+  rules:
+  - host: xip.io
+    http:
+      paths:
+      - backend:
+          serviceName: ajgajg-development
+          servicePort: 4000
+        pathType: ImplementationSpecific
 status:
   loadBalancer: {}
