@@ -68,7 +68,6 @@ metadata:
     app: cobaingress-development
   name: cobaingress-development
   namespace: default
-perClusterState:
     - clusterId: fleet-default/c-kdkrk
       patch:
         metadata:
