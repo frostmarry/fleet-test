@@ -70,7 +70,7 @@ metadata:
   namespace: default
  spec:
    rules:
-     - host: dumb.aws.microgen.id
+     - host: xip.io
        http:
          paths:
            - backend:
