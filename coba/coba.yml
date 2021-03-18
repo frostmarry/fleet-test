@@ -1,113 +1,81 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: "apps/v1"
+kind: "Deployment"
 metadata:
-  name: coba-clogin
+  name: "cobaingress-development"
   annotations:
-    cattle.io/timestamp: 2021-02-10T04:15:38.641Z
+    cattle.io/timestamp: "2021-02-15T10:15:27.619Z"
   labels:
-    appId: clogin
+    app: "cobaingress-development"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      appId: clogin
+      app: "cobaingress-development"
   template:
     metadata:
       labels:
-        appId: clogin
-        environment: development
-        event: post
-        trigger: http
+        app: "cobaingress-development"
     spec:
+      dnsPolicy: "ClusterFirst"
+      restartPolicy: "Always"      
       containers:
-        - name: coba-clogin
-          resources:
-            limits:
-              memory: 2Gi
-          image: registry.mejik.xyz/emeteraidevf8wbd-clogin
-          imagePullPolicy: Always
+        - name: "cobaingress-development"
+          image: "frostmarry/dumbflix-be:v2"
           env:
-          - name: APP_ID
-            value: clogin
-          - name: AUTHENTICATION
-            value: public
-          - name: CONNECTION
-            value: public
-          - name: COTE_LOG
-            value: "false"
-          - name: COTE_MULTICAST_ADDRESS
-            value: 239.1.11.131
-          - name: COTE_REQUEST_TIMEOUT
-            value: "200000"
-          - name: ENVIRONMENT
-            value: DEVELOPMENT
-          - name: EVENT
-            value: post
-          - name: TRIGGER
-            value: http
-          - name: exec_timeout
-            value: 200s
-          - name: passredis
-            value: MPXnNDfU
-          - name: portredis
-            value: "6379"
-          - name: read_timeout
-            value: 200s
-          - name: urlapm
-            value: 103.147.4.230
-          - name: urlredis
-            value: 147.139.160.65
-          - name: write_timeout
-            value: 200s
-          - name: DISCOVERY_HOSTNAME
-            valueFrom:
-              fieldRef:
-                apiVersion: v1
-                fieldPath: status.podIP
-      dnsPolicy: ClusterFirst
-      imagePullSecrets:
-      - name: mejik
-      restartPolicy: Always
-
+            - name: "MICROGEN_SERVICES"
+              value: "main,user"
+            - name: "COTE_LOG"
+              value: "false"
+            - name: "COTE_LOG_UNKNOWN_EVENTS"
+              value: "false"
+            - name: "COTE_REQUEST_TIMEOUT"
+              value: "300000"
+            - name: "COTE_MULTICAST_ADDRESS"
+              value: "239.1.11.131"
+            - name: "DISCOVERY_HOSTNAME"
+              valueFrom:
+                fieldRef:
+                  apiVersion: "v1"
+                  fieldPath: "status.podIP"
+          ports:
+            - containerPort: 5000
+              name: "5000tcp1"
+              protocol: "TCP"
 
 ---
 
-apiVersion: v1
-kind: Service
+apiVersion: "v1"
+kind: "Service"
 metadata:
-  name: coba-clogin
+  name: "cobaingress-development"
   labels:
-    appId: clogin
+    app: "cobaingress-development"
 spec:
-  type: ClusterIP
-  clusterIP: None
+  type: "NodePort"
   ports:
-  - name: default
-    port: 42
-    protocol: TCP
-    targetPort: 42
+    - port: 5000
   selector:
-    appId: clogin
+    app: "cobaingress-development"
 
 ---
 
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  creationTimestamp: "2021-02-10T13:34:13Z"
+  creationTimestamp: 2021-02-15T10:15:27.623Z
   generation: 1
   labels:
-    app: ajgajg-development
-  name: ajgajg-development
-  namespace: default  
+    app: cobaingress-development
+  name: cobaingress-development
+  namespace: default
 spec:
   rules:
-  - host: xip.io
-    http:
-      paths:
-      - backend:
-          serviceName: ajgajg-development
-          servicePort: 4000
-        pathType: ImplementationSpecific
+    - host: xip.io
+      http:
+        paths:
+          - backend:
+              serviceName: cobaingress-development
+              servicePort: 5000
+            pathType: ImplementationSpecific
 status:
   loadBalancer: {}
