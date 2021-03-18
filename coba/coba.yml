@@ -102,7 +102,7 @@ metadata:
 #           - secretName: aws
  spec:
    rules:
-     - host: dumb.{clusterName}.microgen.id
+     - host: dumb.$(clusterName).microgen.id
        http:
          paths:
            - backend:
