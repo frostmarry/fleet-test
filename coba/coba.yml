@@ -77,8 +77,6 @@ metadata:
                serviceName: cobaingress-development
                servicePort: 5000
              pathType: ImplementationSpecific
-   tls:
-    - secretName:	aws
    
 status:
   loadBalancer: {}
