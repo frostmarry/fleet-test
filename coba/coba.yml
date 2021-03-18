@@ -57,49 +57,49 @@ spec:
   selector:
     app: "cobaingress-development"
 
-# ---
+---
 
-# apiVersion: extensions/v1beta1
-# kind: Ingress
-# metadata:
-#   creationTimestamp: 2021-02-15T10:15:27.623Z
-#   generation: 1
-#   labels:
-#     app: cobaingress-development
-#   name: cobaingress-development
-#   namespace: default
-# perClusterState:
-#     - clusterId: fleet-default/c-kdkrk
-#       patch:
-#         metadata:
-#           generation: 1
-#         spec:
-#           rules:
-#           - host: coba.sigmatech.microgen.id
-#             http:
-#               paths:
-#               - backend:
-#                   serviceName: cobaingress-development
-#                   servicePort: 5000
-#                 pathType: ImplementationSpecific
-#         tls:
-#         - secretName: microgen-sigmatech
-#       state: Modified
-#     - clusterId: fleet-default/c-nsg6f
-#       patch:
-#         metadata:
-#           generation: 1
-#         spec:
-#           rules:
-#           - host: coba.aws.sigmatech.microgen.id
-#             http:
-#               paths:
-#               - backend:
-#                   serviceName: cobaingress-development
-#                   servicePort: 5000
-#                 pathType: ImplementationSpecific
-#           tls:
-#           - secretName: aws
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  creationTimestamp: 2021-02-15T10:15:27.623Z
+  generation: 1
+  labels:
+    app: cobaingress-development
+  name: cobaingress-development
+  namespace: default
+perClusterState:
+    - clusterId: fleet-default/c-kdkrk
+      patch:
+        metadata:
+          generation: 1
+        spec:
+          rules:
+          - host: coba.sigmatech.microgen.id
+            http:
+              paths:
+              - backend:
+                  serviceName: cobaingress-development
+                  servicePort: 5000
+                pathType: ImplementationSpecific
+        tls:
+        - secretName: microgen-sigmatech
+      state: Modified
+    - clusterId: fleet-default/c-nsg6f
+      patch:
+        metadata:
+          generation: 1
+        spec:
+          rules:
+          - host: coba.aws.sigmatech.microgen.id
+            http:
+              paths:
+              - backend:
+                  serviceName: cobaingress-development
+                  servicePort: 5000
+                pathType: ImplementationSpecific
+          tls:
+          - secretName: aws
 #  spec:
 #    rules:
 #      - host: xip.io
