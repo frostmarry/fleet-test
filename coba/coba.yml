@@ -62,14 +62,14 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
+  annotations:
+    clusterName: aws
   creationTimestamp: 2021-02-15T10:15:27.623Z
   generation: 1
   labels:
     app: cobaingress-development
   name: cobaingress-development
   namespace: default
-annotations:
-  clusterName: aws
 spec:
   rules:
     - host: coba.aws.sigmatech.microgen.id
