@@ -2,8 +2,8 @@
 kind: GitRepo
 apiVersion: fleet.cattle.io/v1alpha1
 metadata:
-  name: helm
-  namespace: default
+  name: coba
+  namespace: fleet-default
 spec:
   repo: https://github.com/frostmarry/fleet-test.git
   paths:
