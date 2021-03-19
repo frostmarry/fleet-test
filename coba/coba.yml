@@ -61,9 +61,8 @@ spec:
 
 apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
-  annotations:
-    clusterName: aws
+metadata:  
+  clusterName: aws
   creationTimestamp: 2021-02-15T10:15:27.623Z
   generation: 1
   labels:
