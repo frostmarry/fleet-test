@@ -6,6 +6,7 @@ metadata:
   namespace: fleet-default
 spec:
   repo: https://github.com/frostmarry/fleet-test.git
+  branch: main
   paths:
   - coba
   targets:
