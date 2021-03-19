@@ -6,7 +6,7 @@ targetCustomizations:
       host: aws.sigmatech.microgen.id
   clusterSelector:
     matchLabels:
-      fleet.cattle.io/cluster-name: c-nsg6f
+      env: test
 
 - name: microgen
   helm:
