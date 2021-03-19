@@ -9,6 +9,10 @@ metadata:
   name: cobaingress-development
   namespace: default
 spec:
+  tls:
+    - hosts:
+      - coba.{{ .Values.host }}
+      secretName: {{ .Values.ssl }}
   rules:
     - host: coba.{{ .Values.host }}
       http:

@@ -4,6 +4,7 @@ targetCustomizations:
   helm:
     values:
       host: aws.sigmatech.microgen.id
+      ssl: aws
   clusterSelector:
     matchLabels:
       env: aws
@@ -12,6 +13,7 @@ targetCustomizations:
   helm:
     values:
       host: sigmatech.microgen.id
+      ssl: microgen-sigmatech
   clusterSelector:
     matchLabels:
       env: microgen
