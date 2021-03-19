@@ -1,4 +1,4 @@
-```
+```yaml
 kind: GitRepo
 apiVersion: fleet.cattle.io/v1alpha1
 metadata:
