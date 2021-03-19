@@ -6,7 +6,7 @@ targetCustomizations:
       host: aws.sigmatech.microgen.id
   clusterSelector:
     matchLabels:
-      env: test
+      env: aws
 
 - name: microgen
   helm:
@@ -14,4 +14,4 @@ targetCustomizations:
       host: sigmatech.microgen.id
   clusterSelector:
     matchLabels:
-      fleet.cattle.io/cluster-name: c-kdkrk
+      env: microgen

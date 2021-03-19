@@ -13,10 +13,10 @@ spec:
   - name: aws
     clusterSelector:
       matchLabels:
-        fleet.cattle.io/cluster-name: c-nsg6f
+        env: aws
 
   - name: microgen
     clusterSelector:
       matchLabels:
-        fleet.cattle.io/cluster-name: c-kdkrk
+        env: microgen
 ```
