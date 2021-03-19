@@ -68,6 +68,9 @@ metadata:
     app: cobaingress-development
   name: cobaingress-development
   namespace: default
+selector:
+  matchLabels:
+    cluster: aws
 spec:
   rules:
     - host: coba.aws.sigmatech.microgen.id
