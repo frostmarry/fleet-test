@@ -68,7 +68,7 @@ metadata:
     app: cobaingress-development
   name: cobaingress-development
   namespace: default
-annotation:
+annotations:
   clusterName: aws
 spec:
   rules:
