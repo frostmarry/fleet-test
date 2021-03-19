@@ -71,7 +71,7 @@ metadata:
   namespace: default
 spec:
   rules:
-    - host: coba.aws.sigmatech.microgen.id
+    - host: coba.{{ .Values.host }}
       http:
         paths:
           - backend:

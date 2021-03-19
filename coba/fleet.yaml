@@ -1,0 +1,17 @@
+namespace: default
+targetCustomizations:
+- name: aws
+  helm:
+    values:
+      host: aws.sigmatech.microgen.id
+  clusterSelector:
+    matchLabels:
+      fleet.cattle.io/cluster-name: c-nsg6f
+
+- name: microgen
+  helm:
+    values:
+      host: sigmatech.microgen.id
+  clusterSelector:
+    matchLabels:
+      fleet.cattle.io/cluster-name: c-kdkrk
