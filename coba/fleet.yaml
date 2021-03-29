@@ -1,19 +1,19 @@
 namespace: default
 targetCustomizations:
-- name: aws
+- name: makassar
   helm:
     values:
-      host: aws.sigmatech.microgen.id
-      ssl: aws
+      host: makassar.microgen.bnpbcloud.id
+      ssl: bnpb-makassar
   clusterSelector:
     matchLabels:
-      env: aws
+      name : makassar
 
-- name: microgen
+- name: balikpapan
   helm:
     values:
-      host: sigmatech.microgen.id
-      ssl: microgen-sigmatech
+      host: balikpapan.microgen.bnpbcloud.id
+      ssl: bnpb-balikpapan
   clusterSelector:
     matchLabels:
-      env: microgen
+      name: balikpapan
